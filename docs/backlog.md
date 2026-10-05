@@ -3,7 +3,7 @@
 * [x] Getting started with Flet - VINI
 * [x] Step 1: Drag the card around - VINI
 * [x] Step 2: Drop the card in the slot or bounce it back - VINI
-* [ ] Step 3: Adding a second card
+* [ ] Step 3: Adding a second card - KAH
 * [ ] Step 4: Adding more slots
 * [ ] Slot, Card and Solitaire classes
 * [ ] Placing card with offset
