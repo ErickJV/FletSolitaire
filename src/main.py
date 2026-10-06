@@ -1,9 +1,7 @@
 import flet as ft
 
-# Using Container for slot where the card should be dropped
-# on_pan_start event for the card: remember position of card to bounce it back on_pan_end of needed.
-# on_pan_end: check if card is in proximity of the slot and either place it to the slot or return to original position (bounce back).
-# Solitaire class created for holding original position coordinates
+# Adding second card. Now one of the cards will not be on top of stack when being dragged
+# move_on_top function to move the card on top on_pan_start event
 
 
 class Solitaire:
@@ -23,7 +21,14 @@ def main(page: ft.Page):
         card.top = game.start_top
         card.left = game.start_left
 
+    def move_on_top(card, controls):
+        """Moves draggable card to the top of the stack"""
+        controls.remove(card)
+        controls.append(card)
+        page.update()
+
     def start_drag(e: ft.DragStartEvent):
+        move_on_top(e.control, controls)
         solitaire.start_top = e.control.top
         solitaire.start_left = e.control.left
 
@@ -35,7 +40,6 @@ def main(page: ft.Page):
     def drop(e: ft.DragEndEvent):
         if abs(e.control.top - slot.top) < 20 and abs(e.control.left - slot.left) < 20:
             place(e.control, slot)
-
         else:
             bounce_back(solitaire, e.control)
 
@@ -62,12 +66,13 @@ def main(page: ft.Page):
         on_pan_end=drop,
         left=100,
         top=0,
-        content=ft.Container(bgcolor=ft.Colors.YELLOW, width=70, height=100),        
+        content=ft.Container(bgcolor=ft.Colors.YELLOW, width=70, height=100),
     )
 
     solitaire = Solitaire()
 
     controls = [slot, card1, card2]
     page.add(ft.Stack(controls=controls, width=1000, height=500))
+
 
 ft.run(main)
