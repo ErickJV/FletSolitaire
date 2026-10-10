@@ -131,6 +131,8 @@ class Solitaire(ft.Stack):
 
 
 def main(page: ft.Page):
+    page.title = "Cartas"
+
     solitaire = Solitaire()
     page.add(solitaire)
 
